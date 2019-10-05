@@ -43,27 +43,27 @@ export class Weibo {
       this[name] = {};
       for (let index in funcBody) {
         //@ts-ignore
-        this[name][funcBody[index].func] = this._createFunc(funcBody[index]);
+        this[name][funcBody[index].func] = this._createFun(funcBody[index]);
       }
     }
   }
 
-  getGetParam(paras?: Object) {
+  getGetParam(params?: Object) {
     let commonPath = `?${qs.stringify({
       client_id: this.opts.appKey,
       redirect_uri: this.opts.redirectUrl,
       client_secret: this.opts.appSecret
     })}`;
-    if (paras) return commonPath + "&" + qs.stringify(paras);
+    if (params) return commonPath + "&" + qs.stringify(params);
     return commonPath;
   }
 
-  getPostParam(paras?: any) {
-    paras = paras || {};
-    paras.client_id = this.opts.appKey;
-    paras.redirect_uri = this.opts.redirectUrl;
-    paras.client_secret = this.opts.appSecret;
-    return paras;
+  getPostParam(params?: any) {
+    params = params || {};
+    params.client_id = this.opts.appKey;
+    params.redirect_uri = this.opts.redirectUrl;
+    params.client_secret = this.opts.appSecret;
+    return params;
   }
 
   // authorize to get authorize code
@@ -72,9 +72,9 @@ export class Weibo {
     open(path);
   }
 
-  _createFunc(urlParas: any) {
+  _createFun(urlParas: any) {
     let _this = this;
-    return function(pJson: Object, callback: Function) {
+    return function(pJson: Object) {
       let options: any = {},
         postData = "";
       options.hostname = urlParas.host.replace("https://", "");
@@ -95,30 +95,35 @@ export class Weibo {
         };
       }
 
-      const req = https.request(options, function(res) {
-        let fullData = "";
-        res.on("data", function(data) {
-          fullData += data;
-        });
+      return new Promise((reslove, reject) => {
+        const req = https.request(options, function(res) {
+          let fullData = "";
+          res.on("data", function(data) {
+            fullData += data;
+          });
 
-        res.on("end", function() {
-          let buf = Buffer.from(fullData);
-          let jsonData = {};
-          if (buf) {
-            try {
-              //@ts-ignore
-              jsonData = JSON.parse(buf);
-            } catch (e) {
-              throw new Error(`server error, ${e}`);
+          res.on("end", function() {
+            let buf = Buffer.from(fullData);
+            let jsonData = {};
+            if (buf) {
+              try {
+                //@ts-ignore
+                jsonData = JSON.parse(buf);
+              } catch (e) {
+                throw new Error(`server error, ${e}`);
+              }
             }
-          }
-          callback(jsonData);
-        });
-      });
 
-      req.end(postData);
-      req.on("error", function(e) {
-        throw new Error(`request error, ${e}`);
+            reslove(jsonData);
+          });
+        });
+
+        req.on("error", function(e) {
+          reject(e);
+          throw new Error(`request error, ${e}`);
+        });
+
+        req.end(postData);
       });
     };
   }

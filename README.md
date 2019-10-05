@@ -2,11 +2,14 @@
 
 # Weibo-node-api
 
-> a nodejs weibo sdk which can let you use weibo api easily
+> 封装了微博 api，在 [node-weibo](https://github.com/vczero/node-weibo) 的基础上用 typescript 重写，并增加了一些新的 api。
+> 🙏[vczero](https://github.com/vczero) !!!
 
 #### 安装
 
-##### npm install weibo-node-api
+```
+npm install weibo-node-api
+```
 
 #### 一、API 使用说明
 
@@ -64,9 +67,9 @@
     /*
     +--------------------------------------------------
     2：需要获取access_token
-    (1)阅读微博开放平台API
+    (1) 阅读微博开放平台API
        如：http://open.weibo.com/wiki/OAuth2/access_token，
-    (2)code是您浏览器窗口获得的code。
+    (2) 将code替换成你实时获取的code。
     +---------------------------------------------------
     */
 

@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "1.0.0",
   "description": "A Nodejs weibo api sdk",
-  "main": "index.ts",
+  "main": "./lib/index.js",
   "files": [
     "lib"
   ],
@@ -57,7 +57,8 @@
   },
   "keywords": [
     "weibo",
-    "nodejs"
+    "nodejs",
+    "typescript"
   ],
   "author": "Blesstosam",
   "bugs": {

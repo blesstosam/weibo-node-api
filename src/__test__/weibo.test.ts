@@ -1,6 +1,5 @@
 import test from "ava";
-import { Weibo } from "../weibo-sdk/index";
-import { WeiboClient } from "../weibo";
+import { Weibo } from "../index";
 
 // my test appkey
 const cfg = {
@@ -12,28 +11,26 @@ const cfg = {
 
 // Todo fix test
 // when open brower, the test closed
-test.skip("weibo_sdk_test", t => {
+test("weibo_sdk_test", async t => {
   const weibo = new Weibo(cfg);
   weibo.authorize();
 
-  weibo.OAuth2.access_token(
-    {
-      code: "3713366ba477464c7250d41794404c7b",
-      grant_type: "authorization_code"
-    },
-    (data: any) => {
-      t.truthy(data.access_token);
+  const data = await weibo.OAuth2.access_token({
+    code: "704c848903c8ef32d05e10086859a517",
+    grant_type: "authorization_code"
+  });
 
-      weibo.Statuses.share(
-        {
-          source: weibo.opts.appKey,
-          access_token: data.access_token,
-          status: encodeURI(`just for test! ${weibo.opts.secureDomain}`)
-        },
-        (resp: any) => {
-          t.truthy(resp.id);
-        }
-      );
-    }
-  );
+  // console.log(data)
+
+  t.truthy(data.access_token);
+
+  const resp = await weibo.Statuses.share({
+    source: weibo.opts.appKey,
+    access_token: data.access_token,
+    status: `just for test! ${encodeURI(weibo.opts.secureDomain)}`
+  });
+
+  // console.log(resp)
+
+  t.truthy(resp.id);
 });
