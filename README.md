@@ -67,42 +67,29 @@ npm install weibo-node-api
     /*
     +--------------------------------------------------
     2：需要获取access_token
-    (1) 阅读微博开放平台API
-       如：http://open.weibo.com/wiki/OAuth2/access_token，
-    (2) 将code替换成你实时获取的code。
     +---------------------------------------------------
     */
 
-    weibo.OAuth2.access_token(
+    const res = await weibo.OAuth2.access_token(
     {
       code: "3713366ba477464c7250d41794404c7b",
       grant_type: "authorization_code"
-    },
-    (data) => {
-      console.log(data)
-    }
-
-);
+    });
+    console.log(res)
 
     /*
     +--------------------------------------------------
-    例3：调用API
-    (1)发微博api
-       如：https://open.weibo.com/wiki/2/statuses/share，
-    (2)在回调中打印出获取的数据
+    例3：调用API发微博
     +---------------------------------------------------
     */
 
-    weibo.Statuses.share(
+    const resp = resweibo.Statuses.share(
       {
         source: weibo.opts.appKey,
         access_token: data.access_token,
         status: encodeURI(`just for test! ${weibo.opts.secureDomain}`)
-      },
-      (resp: any) => {
-        console.log(resp)
-      }
-    );
+      });
+    console.log(resp)
 
 #### 三、测试 appkey
 
