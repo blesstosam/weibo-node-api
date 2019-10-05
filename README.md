@@ -1,14 +1,8 @@
 [![CircleCI](https://circleci.com/gh/puncsky/typescript-starter.svg?style=svg)](https://circleci.com/gh/puncsky/typescript-starter)
 
-# Weibo-node-api: a nodejs weibo sdk
+# Weibo-node-api
 
-Purposes:
-
-- Use weibo sdk easily
-
-# weibo-node-api
-
-weibo-node-api 是对新浪微博的 API 的封装，基于 Node.js，认证方式采用 OAuth2.
+> a nodejs weibo sdk which can let you use weibo api easily
 
 #### 安装
 
@@ -21,26 +15,23 @@ weibo-node-api 是对新浪微博的 API 的封装，基于 Node.js，认证方�
     (2)新建实例
     const weibo = new Weibo(opts)
 
-    (3)请求授权接口作为单独的接口，即在weibo实例上Weibo.authorize();
+    (3)请求授权接口作为单独的接口，即在weibo实例上
+    weibo.authorize()
+
     (4)浏览：http://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI
-       如上图所示，是API的命名方式.
        +---------
        比如1：需要使用“OAuth2授权接口”，点击链接到页面底部，看到“OAuth2”，那么OAuth2就是一个类，
-       即Weibo.OAuth2.
-       则Weibo.OAuth2的获取access_token的方法是：Weibo.OAuth2.access_token;
-       则授权查询是：Weibo.OAuth2.get_token_info.
-       类：OAuth2
-       方法：access_token
+       weibo.OAuth2.
+       weibo.OAuth2的获取access_token的方法是：weibo.OAuth2.access_token;
+
        +---------
        比如2：需要使用“微博接口”,那么该类的名称是Statuses.
        则返回最新的公共微博是：public_timeline.
-       整个方法的调用是Weibo.Statuses.public_timeline.
-       类：Statuses
-       方法：public_timeline
+       整个方法的调用是weibo.Statuses.public_timeline.
        +---------
 
        所有类和函数命名方式尊重新浪微博API方式，以此类推.
-    (5)所有方法两个参数，第一参数是该接口的参数(json对象格式，不含setting.json中的配置参数)
+    (5)所有方法两个参数，第一参数是该接口的参数(json对象格式，不含appKey, appSecret, access_token等参数)
 
 #### 二、example 说明
 
@@ -124,6 +115,8 @@ weibo-node-api 是对新浪微博的 API 的封装，基于 Node.js，认证方�
 }
 ```
 
-#### 四、API 文档
+#### 四、微博 API 文档
 
-[API 文档](https://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI)
+[微博 API 文档](https://open.weibo.com/wiki/%E5%BE%AE%E5%8D%9AAPI)
+
+#### 五、吐槽 - 微博的 api 真是难用啊！
