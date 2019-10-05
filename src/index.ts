@@ -58,7 +58,7 @@ export class Weibo {
     return commonPath;
   }
 
-  getPostParam(params?: any) {
+  getPostParam(params?: { [key: string]: string }) {
     params = params || {};
     params.client_id = this.opts.appKey;
     params.redirect_uri = this.opts.redirectUrl;
@@ -72,16 +72,18 @@ export class Weibo {
     open(path);
   }
 
-  _createFun(urlParas: any) {
+  _createFun(
+    urlParams: any
+  ): (param: { [key: string]: string }) => Promise<any> {
     let _this = this;
-    return function(pJson: Object) {
-      let options: any = {},
+    return function(pJson) {
+      let options: { [key: string]: any } = {},
         postData = "";
-      options.hostname = urlParas.host.replace("https://", "");
+      options.hostname = urlParams.host.replace("https://", "");
       options.port = 443;
-      options.path = urlParas.path;
+      options.path = urlParams.path;
 
-      if (urlParas.rmethod[0] === "GET") {
+      if (urlParams.rmethod[0] === "GET") {
         options.path = options.path + _this.getGetParam(arguments[0]);
         options.method = "GET";
       } else {
