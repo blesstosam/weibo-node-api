@@ -1,4 +1,11 @@
-export default {
+export interface ConfigItem {
+  func: string;
+  host: string;
+  path: string;
+  rmethod: Array<string>;
+}
+
+const urlConfig: { [key: string]: Array<ConfigItem> } = {
   OAuth2: [
     {
       func: "access_token",
@@ -1164,3 +1171,5 @@ export default {
     }
   ]
 };
+
+export default urlConfig;

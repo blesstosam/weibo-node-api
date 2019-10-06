@@ -1,7 +1,7 @@
 import open from "open";
 import https from "https";
 import qs from "qs";
-import urlConfig from "./config";
+import urlConfig, { ConfigItem } from "./config";
 
 export interface WeiboOpts {
   appKey: string;
@@ -73,7 +73,7 @@ export class Weibo {
   }
 
   _createFun(
-    urlParams: any
+    urlParams: ConfigItem
   ): (param: { [key: string]: string }) => Promise<any> {
     let _this = this;
     return function(pJson) {
