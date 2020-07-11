@@ -1,7 +1,7 @@
 {
   "name": "weibo-node-api",
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Nodejs weibo api sdk",
   "main": "./lib/index.js",
   "files": [
@@ -95,8 +95,7 @@
     "typescript": "3.6.3"
   },
   "engines": {
-    "node": "10.16.3",
-    "npm": "6.11.3"
+    "node": ">=6.17.1"
   },
   "dependencies": {
     "dotenv": "^8.1.0",

@@ -1,0 +1,10 @@
+2020-07-11 - 1.0.1 (3c7c0d1)
+3c7c0d1 (HEAD -> master, origin/master) refactor: remove any type
+4da8d83 docs: update readme
+fa25784 refactor: remove any type
+9a85dff fix: remove private in package.json
+f7c97e3 refactor:  use promise instead of callback
+76410f3 docs: update readme
+39776dd init
+
+
